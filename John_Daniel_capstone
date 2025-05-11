@@ -1,1 +1,57 @@
 Capstone Project on Vulnerability assessment for Dahel Techies Website
+
+Found  Exim CVE-2025-30232 Vulnerability Report
+
+Overview
+CVE ID: CVE-2025-30232
+Affected Software: Exim versions 4.96, 4.97, 4.98, 4.98.1
+Description: Use-after-free vulnerability allowing local privilege escalation.
+CVSS Score: 8.1 (MITRE: 8.8 in some sources)
+Discovered By: Trend Micro
+Reported: March 13, 2025
+Published: March 26, 2025
+Fixed In: Exim 4.98.2
+
+Impact
+Privilege Escalation: Local attackers with command-line access can gain elevated privileges, potentially compromising the entire server.
+
+Conditions:
+Vulnerable Exim version (4.96–4.98.1).
+Command-line access required.
+Debug mode with pretriggers increases risk (not default in cPanel).
+Server Affected: Daheltech.com running Exim 4.98.1.
+
+Mitigation and Recommendations
+Upgrade Exim:
+
+exim -bV  # Verify version
+yum update exim  # CentOS/RHEL
+apt-get update && apt-get upgrade exim4  # Debian/Ubuntu
+
+Disable Debug Mode:
+Avoid -dp flag or pretrigger=debug options.
+
+Limit Command-Line Access:
+Restrict shell access to trusted users.
+Monitor Updates:
+
+
+Subscribe to exim-announce@lists.exim.org.
+Check https://code.exim.org/exim/exim.git.
+
+Verification
+Check Version:
+exim -bV
+Check Debug Mode:
+ps aux | grep exim
+SMTP Banner:
+telnet "Place your target here"
+
+References
+Exim Official: https://exim.org/static/doc/security/CVE-2025-30232.txt
+SecurityOnline: https://securityonline.info/cve-2025-30232-use-after-free-vulnerability-in-exim/
+cPanel: https://support.cpanel.net/hc/en-us/articles/360055110853-Exim-CVE-2025-30232
+CERT-FR Advisory: CERTFR-2025-AVI-0244
+
+Recommendation
+Immediately upgrade to Exim 4.98.2.
